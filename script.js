@@ -5,7 +5,6 @@ function verificarStatus() {
     const hora = agora.getHours();
     const minutos = agora.getMinutes();
     const horaAtualEmMinutos = (hora * 60) + minutos;
-
     let estaAberto = false;
 
     if (dia >= 1 && dia <= 5) {
@@ -20,17 +19,18 @@ function verificarStatus() {
 
     const texto = document.getElementById("texto-status");
     const ponto = document.getElementById("ponto-status");
-
-    if (estaAberto) {
-        texto.innerText = "ABERTO AGORA";
-        texto.style.color = "#00FF00";
-        ponto.style.color = "#00FF00";
-        ponto.classList.add("animar-ponto");
-    } else {
-        texto.innerText = "FECHADO NO MOMENTO";
-        texto.style.color = "#FF0000";
-        ponto.style.color = "#FF0000";
-        ponto.classList.remove("animar-ponto");
+    if (texto && ponto) {
+        if (estaAberto) {
+            texto.innerText = "ABERTO AGORA";
+            texto.style.color = "#00FF00";
+            ponto.style.color = "#00FF00";
+            ponto.classList.add("animar-ponto");
+        } else {
+            texto.innerText = "FECHADO NO MOMENTO";
+            texto.style.color = "#FF0000";
+            ponto.style.color = "#FF0000";
+            ponto.classList.remove("animar-ponto");
+        }
     }
 }
 
@@ -44,7 +44,6 @@ async function perguntarIA() {
     const input = document.getElementById('pergunta-ia');
     const msgArea = document.getElementById('chat-mensagens');
     const pergunta = input.value;
-    
     if (!pergunta) return;
 
     msgArea.innerHTML += `<p class="msg-user"><b>Você:</b> ${pergunta}</p>`;
@@ -53,13 +52,13 @@ async function perguntarIA() {
 
     const API_KEY = "AIzaSyDFfs8mcaTI5Jqjb2I0Gd4aimqJoQaKZ3o"; 
     
-    // ESTA É A URL QUE VAI MATAR O ERRO 404 (Modelo gemini-1.5-flash-latest)
-    const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=${API_KEY}`;
+    // MUDANÇA CRÍTICA: Usando gemini-pro na v1beta (o modelo mais compatível do mundo)
+    const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=${API_KEY}`;
 
     const dadosParaEnviar = {
         contents: [{
             parts: [{
-                text: `Você é o Garçom do Bar Fernandes. Menu: Torresmo c/ Mandioca (R$5), Rabada c/ Tilápia (R$37,90), Costelinha de Caranha (R$4,50), Salsichas, Quibe. Seja engraçado, use gírias de bar e mencione que o site foi feito pelo Benjamim, de 10 anos. Responda em Português. Pergunta: ${pergunta}`
+                text: `Você é o Garçom do Bar Fernandes. Menu: Torresmo c/ Mandioca (R$5), Rabada c/ Tilápia (R$37,90), Costelinha de Caranha (R$4,50). Responda com gírias de bar. O cliente perguntou: ${pergunta}`
             }]
         }]
     };
@@ -74,7 +73,7 @@ async function perguntarIA() {
         const data = await response.json();
 
         if (data.error) {
-            msgArea.innerHTML += `<p class="msg-ia"><b>Garçom:</b> O Google deu erro: ${data.error.message}</p>`;
+            msgArea.innerHTML += `<p class="msg-ia"><b>Garçom:</b> Erro do Google: ${data.error.message}</p>`;
             return;
         }
 
@@ -82,15 +81,13 @@ async function perguntarIA() {
             const respostaIA = data.candidates[0].content.parts[0].text;
             msgArea.innerHTML += `<p class="msg-ia"><b>Garçom:</b> ${respostaIA}</p>`;
         } else {
-            msgArea.innerHTML += `<p class="msg-ia"><b>Garçom:</b> Ih, falhou a conexão!</p>`;
+            msgArea.innerHTML += `<p class="msg-ia"><b>Garçom:</b> Não entendi, patrão!</p>`;
         }
-        
         msgArea.scrollTop = msgArea.scrollHeight;
-
     } catch (e) {
-        msgArea.innerHTML += `<p class="msg-ia"><b>Garçom:</b> Curto-circuito!</p>`;
+        msgArea.innerHTML += `<p class="msg-ia"><b>Garçom:</b> Deu curto-circuito!</p>`;
     }
 }
 
 verificarStatus();
-console.log("BAR FERNANDES ONLINE - VERSAO FINAL");
+console.log("🔥 AGORA O GARÇOM VAI TRABALHAR! 🔥");
