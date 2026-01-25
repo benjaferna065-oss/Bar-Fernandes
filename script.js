@@ -97,5 +97,6 @@ async function perguntarIA() {
 
 }
 
-console.log("JJJJJJJJJJJJ")
+console.log("JJJJJJJJJhJJ")
+
 
