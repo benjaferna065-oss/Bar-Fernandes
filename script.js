@@ -55,7 +55,8 @@ async function perguntarIA() {
     const API_KEY = "AIzaSyATUUC_9BUkztjGqENapdb5OM5A4eGaZO4"; 
     
     // Testando com o modelo Flash Latest na v1beta (o mais compatível)
-    const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-8b:generateContent?key=${API_KEY}`;
+    // Verifique se a sua URL está exatamente assim (usando v1 e o modelo flash)
+const url = `https://generativelanguage.googleapis.com/v1/models/gemini-1.5-flash:generateContent?key=${API_KEY}`;
 
     const dadosParaEnviar = {
         contents: [{
@@ -92,4 +93,5 @@ async function perguntarIA() {
     } catch (e) {
         msgArea.innerHTML += `<p class="msg-ia"><b>Garçom:</b> Deu um curto-circuito aqui! Tenta de novo?</p>`;
     }
+
 }
