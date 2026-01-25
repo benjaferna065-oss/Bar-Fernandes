@@ -8,13 +8,14 @@ function verificarStatus() {
 
     let estaAberto = false;
 
-    if (dia >= 1 && dia <= 5) { // Seg a Sex
+    // Horários do Bar Fernandes
+    if (dia >= 1 && dia <= 5) { // Seg a Sex (14:30 às 00:00)
         if (horaAtualEmMinutos >= 870 && horaAtualEmMinutos < 1440) estaAberto = true;
     } 
-    else if (dia === 6) { // Sábado
+    else if (dia === 6) { // Sábado (10:30 às 01:00)
         if (horaAtualEmMinutos >= 630 || horaAtualEmMinutos < 60) estaAberto = true;
     }
-    else if (dia === 0) { // Domingo
+    else if (dia === 0) { // Domingo (Fechado, mas abre até 01:00 da madrugada de sábado)
         if (horaAtualEmMinutos < 60) estaAberto = true;
     }
 
@@ -47,19 +48,17 @@ async function perguntarIA() {
     
     if (!pergunta) return;
 
+    // Mostra a pergunta do usuário
     msgArea.innerHTML += `<p class="msg-user"><b>Você:</b> ${pergunta}</p>`;
     input.value = '';
     msgArea.scrollTop = msgArea.scrollHeight;
 
-    // Use sua chave de 39 caracteres aqui
+    // SUA CHAVE NOVA (Mantenha esta que você criou)
     const API_KEY = "AIzaSyDFfs8mcaTI5Jqjb2I0Gd4aimqJoQaKZ3o"; 
     
-    // Testando com o modelo Flash Latest na v1beta (o mais compatível)
-    // Verifique se a sua URL está exatamente assim (usando v1 e o modelo flash)
-// Mude para v1beta e adicione -latest no final do modelo
-    // A URL precisa ser exatamente assim para o modelo Flash na v1beta
-   // O Google mudou a regra: para o Gemini Pro, a URL precisa ser exatamente esta:
-    const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=${API_KEY}`;
+    // URL CORRIGIDA (Versão v1beta com o modelo flash)
+    const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${API_KEY}`;
+
     const dadosParaEnviar = {
         contents: [{
             parts: [{
@@ -77,35 +76,28 @@ async function perguntarIA() {
 
         const data = await response.json();
 
+        // Se houver erro na resposta do Google
         if (data.error) {
-            console.error("Erro detalhado:", data.error);
-            msgArea.innerHTML += `<p class="msg-ia"><b>Garçom:</b> O Google disse: ${data.error.message}</p>`;
+            console.error("Erro do Google:", data.error.message);
+            msgArea.innerHTML += `<p class="msg-ia"><b>Garçom:</b> Ih, deu erro: ${data.error.message}</p>`;
             return;
         }
 
+        // Se a IA responder com sucesso
         if (data.candidates && data.candidates[0].content) {
             const respostaIA = data.candidates[0].content.parts[0].text;
             msgArea.innerHTML += `<p class="msg-ia"><b>Garçom:</b> ${respostaIA}</p>`;
         } else {
-            msgArea.innerHTML += `<p class="msg-ia"><b>Garçom:</b> Fiquei sem palavras! Tenta perguntar de outro jeito?</p>`;
+            msgArea.innerHTML += `<p class="msg-ia"><b>Garçom:</b> Fiquei sem palavras! Tenta de novo?</p>`;
         }
         
         msgArea.scrollTop = msgArea.scrollHeight;
 
     } catch (e) {
-        msgArea.innerHTML += `<p class="msg-ia"><b>Garçom:</b> Deu um curto-circuito aqui! Tenta de novo?</p>`;
+        msgArea.innerHTML += `<p class="msg-ia"><b>Garçom:</b> Deu curto-circuito no meu sistema!</p>`;
     }
-
 }
 
-console.log("DESSA VEZ O GARÇOM VEM!!!");
-
-
-
-
-
-
-
-
-
-
+// Inicia o status assim que a página carregar
+verificarStatus();
+console.log("SISTEMA FINAL DO BAR FERNANDES CARREGADO!");
