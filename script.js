@@ -56,7 +56,8 @@ async function perguntarIA() {
     
     // Testando com o modelo Flash Latest na v1beta (o mais compatível)
     // Verifique se a sua URL está exatamente assim (usando v1 e o modelo flash)
-const url = `https://generativelanguage.googleapis.com/v1/models/gemini-1.5-flash:generateContent?key=${API_KEY}`;
+// Mude para v1beta e adicione -latest no final do modelo
+    const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=${API_KEY}`;
 
     const dadosParaEnviar = {
         contents: [{
@@ -97,3 +98,4 @@ const url = `https://generativelanguage.googleapis.com/v1/models/gemini-1.5-flas
 }
 
 console.log("JJJJJJJJJJJJ")
+
