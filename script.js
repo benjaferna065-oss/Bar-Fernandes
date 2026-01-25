@@ -8,14 +8,13 @@ function verificarStatus() {
 
     let estaAberto = false;
 
-    // Horários do Bar Fernandes
-    if (dia >= 1 && dia <= 5) { // Seg a Sex (14:30 às 00:00)
+    if (dia >= 1 && dia <= 5) {
         if (horaAtualEmMinutos >= 870 && horaAtualEmMinutos < 1440) estaAberto = true;
     } 
-    else if (dia === 6) { // Sábado (10:30 às 01:00)
+    else if (dia === 6) {
         if (horaAtualEmMinutos >= 630 || horaAtualEmMinutos < 60) estaAberto = true;
     }
-    else if (dia === 0) { // Domingo (Fechado, mas abre até 01:00 da madrugada de sábado)
+    else if (dia === 0) {
         if (horaAtualEmMinutos < 60) estaAberto = true;
     }
 
@@ -48,21 +47,19 @@ async function perguntarIA() {
     
     if (!pergunta) return;
 
-    // Mostra a pergunta do usuário
     msgArea.innerHTML += `<p class="msg-user"><b>Você:</b> ${pergunta}</p>`;
     input.value = '';
     msgArea.scrollTop = msgArea.scrollHeight;
 
-    // SUA CHAVE NOVA (Mantenha esta que você criou)
     const API_KEY = "AIzaSyDFfs8mcaTI5Jqjb2I0Gd4aimqJoQaKZ3o"; 
     
-    // URL CORRIGIDA (Versão v1beta com o modelo flash)
-    const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${API_KEY}`;
+    // ESTA É A URL QUE VAI MATAR O ERRO 404 (Modelo gemini-1.5-flash-latest)
+    const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=${API_KEY}`;
 
     const dadosParaEnviar = {
         contents: [{
             parts: [{
-                text: `Você é o Garçom do Bar Fernandes. Menu: Torresmo c/ Mandioca (R$5), Rabada c/ Tilápia (R$37,90), Costelinha de Caranha (R$4,50), Salsichas, Quibe. Seja engraçado, use gírias de bar e mencione que o site foi feito pelo Benjamim, de 10 anos. O cliente perguntou: ${pergunta}`
+                text: `Você é o Garçom do Bar Fernandes. Menu: Torresmo c/ Mandioca (R$5), Rabada c/ Tilápia (R$37,90), Costelinha de Caranha (R$4,50), Salsichas, Quibe. Seja engraçado, use gírias de bar e mencione que o site foi feito pelo Benjamim, de 10 anos. Responda em Português. Pergunta: ${pergunta}`
             }]
         }]
     };
@@ -76,28 +73,24 @@ async function perguntarIA() {
 
         const data = await response.json();
 
-        // Se houver erro na resposta do Google
         if (data.error) {
-            console.error("Erro do Google:", data.error.message);
-            msgArea.innerHTML += `<p class="msg-ia"><b>Garçom:</b> Ih, deu erro: ${data.error.message}</p>`;
+            msgArea.innerHTML += `<p class="msg-ia"><b>Garçom:</b> O Google deu erro: ${data.error.message}</p>`;
             return;
         }
 
-        // Se a IA responder com sucesso
         if (data.candidates && data.candidates[0].content) {
             const respostaIA = data.candidates[0].content.parts[0].text;
             msgArea.innerHTML += `<p class="msg-ia"><b>Garçom:</b> ${respostaIA}</p>`;
         } else {
-            msgArea.innerHTML += `<p class="msg-ia"><b>Garçom:</b> Fiquei sem palavras! Tenta de novo?</p>`;
+            msgArea.innerHTML += `<p class="msg-ia"><b>Garçom:</b> Ih, falhou a conexão!</p>`;
         }
         
         msgArea.scrollTop = msgArea.scrollHeight;
 
     } catch (e) {
-        msgArea.innerHTML += `<p class="msg-ia"><b>Garçom:</b> Deu curto-circuito no meu sistema!</p>`;
+        msgArea.innerHTML += `<p class="msg-ia"><b>Garçom:</b> Curto-circuito!</p>`;
     }
 }
 
-// Inicia o status assim que a página carregar
 verificarStatus();
-console.log("SISTEMA FINAL DO BAR FERNANDES CARREGADO!");
+console.log("BAR FERNANDES ONLINE - VERSAO FINAL");
