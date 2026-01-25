@@ -52,14 +52,13 @@ async function perguntarIA() {
     msgArea.scrollTop = msgArea.scrollHeight;
 
     // Use sua chave de 39 caracteres aqui
-    const API_KEY = "AIzaSyATUUC_9BUkztjGqENapdb5OM5A4eGaZO4"; 
+    const API_KEY = "AIzaSyDFfs8mcaTI5Jqjb2I0Gd4aimqJoQaKZ3o"; 
     
     // Testando com o modelo Flash Latest na v1beta (o mais compatível)
     // Verifique se a sua URL está exatamente assim (usando v1 e o modelo flash)
 // Mude para v1beta e adicione -latest no final do modelo
     // A URL precisa ser exatamente assim para o modelo Flash na v1beta
-    const url = `https://generativelanguage.googleapis.com/v1/models/gemini-1.5-flash:generateContent?key=${API_KEY}`;
-
+    const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${API_KEY}`;
     const dadosParaEnviar = {
         contents: [{
             parts: [{
@@ -99,6 +98,7 @@ async function perguntarIA() {
 }
 
 console.log("GARCOM ACORDANDO!!!");
+
 
 
 
