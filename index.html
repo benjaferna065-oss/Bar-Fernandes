@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="shortcut icon" href="favicon-32x32.png" type="image/x-icon">
+    <title>Site | Bar Fernandes</title>
+</head>
+<body>
+    <header>
+        <h1>Bar Fernandes</h1>
+        <p>Aqui no bar temos variedade de bebidas e comidas</p>
+        <a href="index.html" class="menu">Menu</a>
+        <a href="cardapio.html" class="cardapio">Cardápio</a>
+    </header>
+    <main>
+        <div id="status-container">
+    <span id="ponto-status" class="span">●</span>
+    <span id="texto-status" class="span">Verificando...</span>
+</div>
+        <div class="Horarios">
+            <ul>
+                <li>⏰Seg à sexta de 14:30 às 00:00</li>
+                <li>⏰Sábado de 10:30 às 01:00</li>
+                <li>❌Domingo fechado</li>
+            </ul>
+            <h3><a href="https://www.google.com/maps/dir/-16.3377024,-48.9279904/Bar+Fernandes+-+Jardim+Europa,+An%C3%A1polis+-+GO,+75094-620/@-16.3377788,-48.9278942,19.71z/data=!4m14!4m13!1m5!3m4!1m2!1d-48.9279483!2d-16.3377202!3s0x935ea4fade35c4b1:0xeba70066bad3073c!1m5!1m1!1s0x935ea4fad9272b47:0x8d0073ebd8f05878!2m2!1d-48.928018!2d-16.3376775!3e2?entry=ttu&g_ep=EgoyMDI2MDEyMS4wIKXMDSoASAFQAw%3D%3D">Localização do Bar</a></h3>
+            <nav>
+            <h3><a href="https://www.instagram.com/barfernandes1/">instagram</a></h3>
+                
+                </label>
+            </nav>
+        </div>
+        <section class="avaliacao">
+    <h2 class="titulo-secao">Deixe sua Avaliação ⭐</h2>
+    <form action="https://api.web3forms.com/submit" method="POST" class="form-avaliacao">
+        
+        <input type="hidden" name="access_key" value="0ed38b8f-4481-4984-9885-9e54811dc77a">
+
+        <label for="nome">Seu Nome:</label>
+        <input type="text" name="name" placeholder="Ex: João Silva" required>
+
+        <label for="comida">O que você comeu?</label>
+        <select name="prato_escolhido">
+            <option value="torresmo">Torresmo c/ Mandioca</option>
+            <option value="rabada">Rabada c/ Mandioca</option>
+            <option value="frango">Frango à passarinho</option>
+            <option value="outros">Outros</option>
+        </select>
+
+        <label for="nota">Sua nota (1 a 10):</label>
+        <input type="number" name="nota" min="1" max="10" required>
+
+        <label for="mensagem">O que achou da comida?</label>
+        <textarea name="message" placeholder="Conte o que achou! Do site e da Comida" required></textarea>
+
+        <button type="submit" class="btn-enviar">Enviar Avaliação</button>
+    </form>
+</section>
+<div id="btn-chat" onclick="toggleChat()">
+    <span>🤖</span>
+</div>
+
+<div id="chat-container" class="hidden">
+    <div id="chat-header">
+        <strong>Garçom IA - Bar Fernandes</strong>
+        <button onclick="toggleChat()">X</button>
+    </div>
+    <div id="chat-mensagens">
+        <p class="msg-ia">Olá! Sou o garçom digital. Dúvida no pedido? Me pergunta aí!</p>
+    </div>
+    <div id="chat-input-area">
+        <input type="text" id="pergunta-ia" placeholder="Ex: O que combina com cerveja?">
+        <button onclick="perguntarIA()">➤</button>
+    </div>
+</div>
+    </main>
+    <footer>
+        <p>&copy; 2026 Bar Fernandes. Todos os direitos reservados.</p>
+
+        <h2 class="sobreh2">Sobre o criador do site</h2>
+        <p class="sobrep">Olá! Meu nome é Benjamim Fernandes, tenho 10 anos e sou o criador deste site. Desenvolvi este projeto como parte do meu aprendizado em desenvolvimento web. Estou sempre buscando aprimorar minhas habilidades e criar experiências digitais envolventes. Se você tiver alguma dúvida ou quiser entrar em contato, sinta-se à vontade para me enviar uma mensagem nas rede social <a href="https://www.instagram.com/benjamimfborges/">Benjamim Instagram</a>. Obrigado por visitar o site do Bar Fernandes!</p>
+    </footer>
+    <script src="script.js"></script>
+</body>
+</html>

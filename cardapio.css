@@ -1,0 +1,90 @@
+body {
+    background: linear-gradient(to bottom, #532f03, #956f2c);
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+
+
+.container-cardapio {
+    display: flex;
+    flex-direction: column; /* Isso faz os cards ficarem um embaixo do outro ⬇️ */
+    align-items: center;    /* Centraliza os cards na tela */
+    gap: 15px;              /* Espaço entre um card e outro */
+    padding: 20px;
+}
+
+.card-item {
+    width: 90%;             /* Faz o card ocupar quase a largura toda da tela */
+    max-width: 500px;       /* Mas não deixa ele ficar gigante em telas grandes */
+    /* Mantenha o restante do seu código de cores e bordas aqui */
+}
+
+/* Estilo de cada item individual */
+.card-item {
+    background-color: #4a2e01; /* Marrom escuro para contrastar com o fundo */
+    border: 2px solid #956f2c; /* Bordinha dourada/madeira */
+    border-radius: 12px;       /* Pontas arredondadas */
+    padding: 20px;
+    width: 280px;              /* Largura fixa para ficarem alinhados */
+    text-align: center;
+    color: white;
+    box-shadow: 0px 4px 15px rgba(0,0,0,0.4); /* Sombra para dar profundidade */
+    transition: transform 0.3s ease; /* Animação suave ao passar o mouse */
+}
+
+/* Efeito ao passar o mouse (Hover) */
+.card-item:hover {
+    transform: translateY(-8px); /* O card sobe levemente */
+    border-color: #FFD700;       /* A borda brilha em dourado */
+}
+
+/* Título do prato/bebida */
+.card-item h3 {
+    color: #FFD700;       /* Dourado para o nome do prato */
+    font-family: 'Arial', sans-serif;
+    margin-bottom: 10px;
+    font-size: 1.2rem;
+}
+
+/* Descrição (o que vem no prato) */
+.card-item p {
+    font-size: 14px;
+    color: #dddddd;
+    line-height: 1.4;
+    height: 45px;         /* Mantém o texto alinhado mesmo se for curto */
+    overflow: hidden;     /* Evita que textos longos quebrem o layout */
+    margin-bottom: 15px;
+}
+
+/* Estilo do Preço */
+.preco {
+    display: block;
+    font-size: 22px;
+    font-weight: bold;
+    color: #ffffff;
+    background-color: #7e5714; /* Fundo destaque para o valor */
+    padding: 5px 10px;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+
+header {
+    background-color: #4a2e01;
+    color: white;
+    padding: 20px;
+    text-align: center;
+    font-family: 'Arial', sans-serif;
+}
+
+header a {
+    color: white;
+    text-decoration: none;
+    margin: 0 15px;
+    font-size: 18px;
+}
+
+header a:hover {
+    text-decoration: underline;
+}
