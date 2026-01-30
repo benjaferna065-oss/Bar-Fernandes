@@ -52,4 +52,59 @@ window.onload = function() {
     setInterval(verificarStatus, 60000);
 };
 
+export default async function handler(req, res) {
+  if (req.method !== "POST") {
+    return res.status(405).json({ error: "Método não permitido" });
+  }
+
+  try {
+    const { pergunta } = req.body;
+
+    const response = await fetch("https://api.openai.com/v1/chat/completions", {
+      method: "POST",
+      headers: {
+        "Authorization": `Bearer ${process.env.OPENAI_API_KEY}`,
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        model: "gpt-4o-mini",
+        messages: [
+          {
+            role: "system",
+            content: `
+Você é o Garçom do Bar Fernandes.
+Fale de forma divertida, com gírias leves de bar.
+Menu:
+- Torresmo c/ Mandioca (R$5)
+- Rabada c/ Tilápia (R$37,90)
+- Costelinha de Caranha (R$4,50)
+- Salsicha
+- Quibe
+
+Sempre seja educado.
+`
+          },
+          {
+            role: "user",
+            content: pergunta
+          }
+        ]
+      })
+    });
+
+    const data = await response.json();
+
+    return res.status(200).json({
+      resposta: data.choices[0].message.content
+    });
+
+  } catch (err) {
+    return res.status(500).json({
+      resposta: "Ixi… deu problema aqui na cozinha 😅 tenta de novo!"
+    });
+  }
+}
+
+
 console.log("Site do Bar Fernandes carregado com sucesso!");
+
