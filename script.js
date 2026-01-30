@@ -90,4 +90,5 @@ async function perguntarIA() {
 }
 
 verificarStatus();
-console.log("🔥 AGORA O GARÇOM VAI TRABALHAR! 🔥");
+console.log("🔥 AGORA O GARÇOM VAI TRABALHAR");
+
