@@ -75,4 +75,5 @@ window.onload = () => {
     setInterval(verificarStatus, 60000);
 };
 
-console.log("Site do Bar Fernandes carregado com sucesso!");
+console.log("Site do Bar Fernandes carregado com sucess");
+
